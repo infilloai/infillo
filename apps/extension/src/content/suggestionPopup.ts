@@ -509,42 +509,42 @@ export class SuggestionPopup {
     const currentSuggestion = this.currentSuggestions.suggestions[this.currentSuggestions.currentIndex];
     if (!currentSuggestion) return;
     
-    // Update suggestion value with smart truncation
+    // Update suggestion value with smart scrolling
     const valueContainer = shadowRoot.querySelector('.suggestion-value-container');
     const valueElement = shadowRoot.querySelector('.suggestion-value');
     if (valueElement && valueContainer) {
       const suggestionText = currentSuggestion.value;
-      const needsTruncation = suggestionText.length > 150 || suggestionText.split('\n').length > 3;
+      const isMultiline = suggestionText.includes('\n');
+      const isLongContent = suggestionText.length > 200;
+      const needsScrolling = suggestionText.length > 150 || suggestionText.split('\n').length > 4;
       
       // Update the text content
       valueElement.textContent = suggestionText;
       valueElement.setAttribute('data-full-text', suggestionText);
       
-      // Reset classes and apply appropriate truncation
-      valueElement.className = needsTruncation ? 'suggestion-value truncated' : 'suggestion-value';
+      // Build CSS classes for content type
+      let cssClasses = 'suggestion-value';
+      if (needsScrolling) cssClasses += ' scrollable';
+      if (isLongContent) cssClasses += ' long-content';
+      if (isMultiline) cssClasses += ' multiline';
       
-      // Handle expand toggle
-      let expandToggle = shadowRoot.querySelector('.expand-toggle');
-      if (needsTruncation && !expandToggle) {
-        // Create expand toggle if it doesn't exist
-        const toggleElement = document.createElement('div');
-        toggleElement.className = 'expand-toggle';
-        toggleElement.setAttribute('data-action', 'toggle-expand');
-        toggleElement.innerHTML = `
-          <span class="icon">▼</span>
-          <span class="text">Show more</span>
+      // Apply the classes
+      valueElement.className = cssClasses;
+      
+      // Handle scroll indicator
+      let scrollIndicator = shadowRoot.querySelector('.scroll-indicator');
+      if (needsScrolling && !scrollIndicator) {
+        // Create scroll indicator if it doesn't exist
+        const indicatorElement = document.createElement('div');
+        indicatorElement.className = 'scroll-indicator';
+        indicatorElement.innerHTML = `
+          <span>📜</span>
+          <span>Scroll to see more</span>
         `;
-        valueContainer.appendChild(toggleElement);
-      } else if (!needsTruncation && expandToggle) {
-        // Remove expand toggle if not needed
-        expandToggle.remove();
-      } else if (expandToggle) {
-        // Reset expand toggle state
-        expandToggle.className = 'expand-toggle';
-        const toggleText = expandToggle.querySelector('.text') as HTMLElement;
-        const toggleIcon = expandToggle.querySelector('.icon') as HTMLElement;
-        if (toggleText) toggleText.textContent = 'Show more';
-        if (toggleIcon) toggleIcon.textContent = '▼';
+        valueContainer.appendChild(indicatorElement);
+      } else if (!needsScrolling && scrollIndicator) {
+        // Remove scroll indicator if not needed
+        scrollIndicator.remove();
       }
     }
 
@@ -595,49 +595,7 @@ export class SuggestionPopup {
     }
   }
 
-  /**
-   * Handle expand/collapse toggle for long suggestions
-   */
-  private handleExpandToggle(): void {
-    if (!this.popup) return;
-
-    const shadowRoot = this.popup.shadowRoot;
-    if (!shadowRoot) return;
-
-    const suggestionValue = shadowRoot.querySelector('.suggestion-value') as HTMLElement;
-    const expandToggle = shadowRoot.querySelector('.expand-toggle') as HTMLElement;
-    const toggleText = expandToggle.querySelector('.text') as HTMLElement;
-    const toggleIcon = expandToggle.querySelector('.icon') as HTMLElement;
-
-    if (!suggestionValue || !expandToggle || !toggleText || !toggleIcon) return;
-
-    const isCurrentlyTruncated = suggestionValue.classList.contains('truncated');
-
-    if (isCurrentlyTruncated) {
-      // Expand the content
-      suggestionValue.classList.remove('truncated');
-      suggestionValue.classList.add('expanded');
-      expandToggle.classList.add('expanded');
-      toggleText.textContent = 'Show less';
-      toggleIcon.textContent = '▲';
-      
-      // Smooth height transition
-      suggestionValue.style.transition = 'max-height 0.3s ease-out';
-      
-    } else {
-      // Collapse the content
-      suggestionValue.classList.remove('expanded');
-      suggestionValue.classList.add('truncated');
-      expandToggle.classList.remove('expanded');
-      toggleText.textContent = 'Show more';
-      toggleIcon.textContent = '▼';
-      
-      // Smooth height transition
-      suggestionValue.style.transition = 'max-height 0.3s ease-out';
-    }
-
-    console.log('SuggestionPopup: Toggled suggestion expansion:', !isCurrentlyTruncated ? 'collapsed' : 'expanded');
-  }
+  // Note: handleExpandToggle removed in favor of simple scrolling approach
 
   /**
    * Hide popup
@@ -795,18 +753,19 @@ export class SuggestionPopup {
         font-size: 12px;
         color: #6b7280;
         text-align: center;
-        margin-top: 4px;
+        margin-top: 6px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 4px;
-        opacity: 0.7;
-        animation: fadeInOut 3s ease-in-out;
+        opacity: 0.6;
+        animation: fadeInOut 4s ease-in-out;
+        font-weight: 500;
       }
 
       @keyframes fadeInOut {
         0%, 100% { opacity: 0; }
-        20%, 80% { opacity: 0.7; }
+        25%, 75% { opacity: 0.6; }
       }
 
       /* Responsive improvements for different content lengths */
@@ -820,13 +779,14 @@ export class SuggestionPopup {
           font-size: 16px;
         }
         
-        .suggestion-value.truncated {
-          -webkit-line-clamp: 2;
-          max-height: 2.8em; /* 2 lines × 1.4 line-height */
+        .suggestion-value.scrollable {
+          max-height: 100px;
+          font-size: 15px;
+          padding: 10px;
         }
         
-        .expand-toggle {
-          font-size: 13px;
+        .scroll-indicator {
+          font-size: 11px;
         }
       }
 
@@ -1923,10 +1883,7 @@ export class SuggestionPopup {
         case 'next':
           this.navigateToNext();
           break;
-        case 'toggle-expand':
-          console.log('SuggestionPopup: Toggle expand clicked');
-          this.handleExpandToggle();
-          break;
+        // Note: toggle-expand removed in favor of simple scrolling
       }
     });
 
