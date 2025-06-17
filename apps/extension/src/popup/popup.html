@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfilloAI Extension</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* Inline styles for CSP compliance and complete isolation */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 448px;
+      height: 418px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333333;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    #popup-root {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Loading state */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 16px;
+      color: #666666;
+    }
+
+    .loading::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      border: 2px solid #e0e0e0;
+      border-top: 2px solid #333333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="popup-root">
+    <div class="loading">Loading...</div>
+  </div>
+</body>
+</html> 

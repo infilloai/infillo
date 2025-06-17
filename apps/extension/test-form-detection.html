@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfilloAI Form Detection Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+    
+    .form-section {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    h2 {
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #4F39F6;
+    }
+    
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .row .form-group {
+      flex: 1;
+    }
+    
+    button {
+      background: #4F39F6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    button:hover {
+      background: #4429E6;
+    }
+    
+    .info-box {
+      background: #e8f0fe;
+      border: 1px solid #c6dafc;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .info-box p {
+      margin: 0;
+      color: #1a73e8;
+    }
+    
+    [contenteditable] {
+      min-height: 60px;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
+      transition: border-color 0.2s;
+    }
+    
+    [contenteditable]:focus {
+      outline: none;
+      border-color: #4F39F6;
+    }
+  </style>
+</head>
+<body>
+  <h1>InfilloAI Form Detection Test Page</h1>
+  
+  <div class="info-box">
+    <p>This page tests the InfilloAI extension's form field detection. The extension icon should appear when you hover over or focus on form fields.</p>
+  </div>
+  
+  <!-- Contact Information Form -->
+  <div class="form-section">
+    <h2>Contact Information</h2>
+    <form>
+      <div class="row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Doe">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="john.doe@example.com">
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Street Address</label>
+        <input type="text" id="address" name="address" placeholder="123 Main Street">
+      </div>
+      
+      <div class="row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="New York">
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <select id="state" name="state">
+            <option value="">Select State</option>
+            <option value="NY">New York</option>
+            <option value="CA">California</option>
+            <option value="TX">Texas</option>
+            <option value="FL">Florida</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="zip">ZIP Code</label>
+          <input type="text" id="zip" name="zip" placeholder="10001">
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Login Form -->
+  <div class="form-section">
+    <h2>Login Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username">
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+      </div>
+      
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+  
+  <!-- Additional Input Types -->
+  <div class="form-section">
+    <h2>Various Input Types</h2>
+    <form>
+      <div class="form-group">
+        <label for="website">Website URL</label>
+        <input type="url" id="website" name="website" placeholder="https://example.com">
+      </div>
+      
+      <div class="form-group">
+        <label for="search">Search</label>
+        <input type="search" id="search" name="search" placeholder="Search for something...">
+      </div>
+      
+      <div class="form-group">
+        <label for="birthdate">Date of Birth</label>
+        <input type="date" id="birthdate" name="birthdate">
+      </div>
+      
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" placeholder="1" min="1" max="100">
+      </div>
+      
+      <div class="form-group">
+        <label for="bio">Biography</label>
+        <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="notes">Notes (ContentEditable)</label>
+        <div contenteditable="true" id="notes" role="textbox" aria-label="Notes">
+          This is a contenteditable div that should also be detected...
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Disabled/Readonly Fields -->
+  <div class="form-section">
+    <h2>Disabled and Readonly Fields (Should NOT show icon)</h2>
+    <form>
+      <div class="form-group">
+        <label for="disabledField">Disabled Field</label>
+        <input type="text" id="disabledField" name="disabledField" value="This field is disabled" disabled>
+      </div>
+      
+      <div class="form-group">
+        <label for="readonlyField">Readonly Field</label>
+        <input type="text" id="readonlyField" name="readonlyField" value="This field is readonly" readonly>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+    // Log when the page loads
+    console.log('Form detection test page loaded');
+    
+    // Add event listeners to monitor form interactions
+    document.querySelectorAll('input, textarea, select, [contenteditable]').forEach(field => {
+      field.addEventListener('focus', (e) => {
+        console.log('Field focused:', e.target.id || e.target.name || 'unnamed field');
+      });
+      
+      field.addEventListener('blur', (e) => {
+        console.log('Field blurred:', e.target.id || e.target.name || 'unnamed field');
+      });
+    });
+  </script>
+</body>
+</html> 
