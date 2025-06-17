@@ -1,0 +1,35 @@
+# Ignore node modules (will be installed during build)
+node_modules/
+
+# Ignore some environment files (keep .env for deployment)
+.env.*
+
+# Ignore build artifacts
+dist/
+.turbo/
+
+# Ignore logs
+logs/
+
+# Ignore test files
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+test-*.js
+debug-*.js
+
+# Ignore uploads directory (should use cloud storage)
+uploads/
+
+# Ignore git files
+.git/
+.gitignore
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore temp files
+*.tmp
+*.temp 

@@ -1,0 +1,58 @@
+# Node modules (will be installed in container)
+node_modules/
+*/node_modules/
+
+# Build artifacts
+dist/
+.next/
+.turbo/
+
+# Environment files (should be set via env vars)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files and coverage
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Documentation files
+*.md
+docs/
+
+# Development files
+debug-*.js
+test-*.js
+
+# Upload directories (should use cloud storage)
+uploads/
+temp/
+
+# Chrome extension (not needed for backend)
+apps/extension/
+
+# Web app (not needed for backend)
+apps/web/ 
